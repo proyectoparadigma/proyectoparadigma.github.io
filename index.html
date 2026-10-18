@@ -159,7 +159,7 @@ h1,h2,h3,h4{font-family:var(--font);color:var(--ink);text-wrap:balance;line-heig
 .post-hero > .pad{position:relative;padding-block:20px 48px}
 .post-hero .wrap{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);gap:0;align-items:center;max-width:1900px}
 .phimg{position:relative;margin:0 42px 48px 0;align-self:start}
-.phimg img{position:relative;display:block;width:100%;height:auto;max-width:100%}
+.phimg img{position:relative;display:block;width:100%;height:auto;max-width:100%;max-height:min(720px,80vh);object-fit:cover}
 .phimg .slab{position:absolute;top:50%;left:42px;right:-42px;bottom:-48px;background:var(--red)}
 .post-hero .info{display:grid;gap:22px;padding:clamp(24px,8vw,140px) 0 0 clamp(24px,7vw,110px)}
 .post-hero .info .label{font-size:1.25rem;color:var(--ink)}
@@ -279,7 +279,11 @@ const topicMap = {
   "consejos-para-asimilar-el-viaje-y-salir-de-tu-zona-de-confort":["Desarrollo personal"],
   "ensenando-a-la-mano-con-sentimientos":["Diseño","Desarrollo personal"],
   "diseno-que-se-convierte-en-historia-las-bases-de-los-equipos-de-la-32nd-americascup":["Diseño"],
-  "pinceladas-de-un-padre":["Relatos"]
+  "pinceladas-de-un-padre":["Relatos"],
+  "vigila-tienes-un-mamut-en-tu-espalda":["Equipos y agilidad","Desarrollo personal"],
+  "nunca-habia-sido-tan-facil-parecer-brillante":["Equipos y agilidad", "Desarrollo personal"],
+  "la-templanza-tambien-es-una-forma-de-talento":["Desarrollo personal"],
+  "hay-una-ballena-en-una-piscina":["Mejora continua", "Equipos y agilidad"]
 };
 POSTS.forEach(p => p.topics = topicMap[p.slug] || ["Desarrollo personal"]);
 
@@ -303,7 +307,7 @@ try { const s = JSON.parse(localStorage.getItem("pp-filter")||"null"); if (s) fi
 const saveFilter = () => { try { localStorage.setItem("pp-filter", JSON.stringify(filter)); } catch(e) {} };
 
 function listMarkup(){
-  return `<div class="grid">${POSTS.slice(1).map(p => `<a class="card" href="#${p.slug}">
+  return `<div class="grid">${POSTS.map(p => `<a class="card" href="#${p.slug}">
       ${p.img ? `<img class="thumb" src="${p.img}" alt="" loading="lazy">` : ""}
       <h4>${esc(p.title)}</h4>
       <p>${esc(p.excerpt.split(/\s+/).length > 50 ? p.excerpt.split(/\s+/).slice(0,50).join(" ") + "…" : p.excerpt)}</p>
